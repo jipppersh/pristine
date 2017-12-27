@@ -1,0 +1,20 @@
+body {
+  background: url("../images/background.jpg") no-repeat;
+  background-size: cover;
+}
+
+.modal-header, .modal-footer {
+  background-color: #c78400 !important;
+  color: white;
+}
+
+.modal-body {
+  background: url("../images/background.jpg") no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  color: white;
+}
+
+.btn {
+  border-radius: 0;
+}
