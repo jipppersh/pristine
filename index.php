@@ -1,10 +1,12 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/navbar.css">
-  <title>Pristine Hotel</title>
+  <link rel="stylesheet" href="css/design.css">
+  <title>CLASS A</title>
 </head>
 <body>
   <nav class="navbar navbar-default" style="border-radius:0">
@@ -15,33 +17,47 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/pristinehotel">Pristine Hotel</a>
+        <a class="navbar-brand" href="/pristinehotel">CLASS A</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">About Us</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+<?php
+if (!isset($_SESSION['email'])) {
+  ?>
           <li><a href="#" data-toggle="modal" data-target="#modalRegistration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login <span class="caret"></span></a>
             <ul class="dropdown-menu" style="padding:20px;width:250px">
               <form id="login" action="index.php" method="post">
                 <div class="form-group">
-                  <label style="color:white">Username:</label>
-                  <input type="email" class="form-control" name="email" required>
+                  <label style="color:white">Email Address:</label>
+                  <input type="email" class="form-control" name="txtEmail" required>
                 </div>
                 <div class="form-group">
                   <label style="color:white">Password:</label>
-                  <input type="password" class="form-control" name="password" required>
+                  <input type="password" class="form-control" name="txtPassword" required>
                 </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Login">
+                <input type="submit" class="btn btn-default btn-block" value="Login">
               </form>
             </ul>
           </li>
+<?php
+} else {
+  ?>
+          <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> <?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+          </li>
+<?php
+}
+?>
         </ul>
       </div>
     </div>
@@ -53,11 +69,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title text-center">Registration</h4>
         </div>
-        <div class="modal-body">
-          <form id="frmRegister" class="form-horizontal">
-            <div class="lblDisplayError">
-              <!-- errors will be shown here ! -->
-            </div>
+        <form id="register" class="form-horizontal">
+          <div class="modal-body">
             <div class="form-group">
               <label for="email" class="col-sm-2 control-label">Name</label>
               <div class="col-sm-10">
@@ -89,24 +102,12 @@
                 <input name="txtRetypePassword" type="password" class="form-control" id="txtRetypePassword" placeholder="Retype Password" minlength="8" required/>
               </div>
             </div>
-            <div class="form-group">
-              <label for="password" class="col-sm-2 control-label">Contact #</label>
-              <div class="col-sm-10">
-                <input name="txtContactNumber" type="number" class="form-control" id="txtContactNumber" placeholder="Contact Number" minlength="10" required/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="captcha" class="col-sm-2 control-label"></label>
-              <div class="col-sm-10">
-                <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6Ler0DUUAAAAAK0dRPfLXX4i3HXRKZCmvdLzyRDp"></div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <br/><button id="btnRegister" type="submit" class="btn btn-info" disabled>Register</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btnRegister" type="submit" class="btn btn-default">Register</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
       </div>
      </div>
   </div>
